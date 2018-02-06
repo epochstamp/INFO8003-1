@@ -5,7 +5,7 @@ Repository for INFO8003-1 (Optimal Decision Making for Complex Problems) Lecture
 
 ## Public
 
-Feel free to challenge yourself over the proposed projects. We'll be glad to help you if you have some questions.
+Feel free to challenge yourself over the assignments and the project. We'll be glad to help you if you have some questions.
 
 ## Practical Informations           
 
