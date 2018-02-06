@@ -19,8 +19,7 @@ Feel free to challenge yourself over the assignments and the project. We'll be g
 
 ### Format
 
- - 3 sessions of exercises, with expected deliverable.
- - 1 project
+3 exercice sessions and 1 project, with expected deliverables.
 
 ### Session and projects
 
