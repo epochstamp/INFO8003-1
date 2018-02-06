@@ -32,5 +32,5 @@ Feel free to challenge yourself over the assignments and the project. We'll be g
 ### Submission
 
 
-Submission takes place to the [Montefiore Submission Platform](https://submit.montefiore.ulg.ac.be/teacher/viewprojects/INFO8003-1)
+Submission process takes place to the [Montefiore Submission Platform](https://submit.montefiore.ulg.ac.be/teacher/viewprojects/INFO8003-1)
 
