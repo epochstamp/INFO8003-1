@@ -1,4 +1,4 @@
-# INFO0049-1 - Knowledge Representation
+# INFO8003-1 - Optimal Decision Making for Complex Problems
 Repository for INFO8003-1 (Optimal Decision Making for Complex Problems) Lecture Material.
 
 
