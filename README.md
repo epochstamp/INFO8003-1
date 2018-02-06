@@ -12,7 +12,7 @@ Feel free to challenge yourself over the proposed projects. We'll be glad to hel
 - Spring 2018, ULiège
 - Programming language : Python 3
 - Instructor: Prof. Damien Ernst ([mail](mailto:dernst@ulg.ac.be), [personal page](http://www.montefiore.ulg.ac.be/~ernst/))
-- Assistant (owner of the repository) : Samy Aittahar ([mail](mailto:saittahar@uliege.be)), [personal page](http://www.montefiore.ulg.ac.be/~saittahar/)
+- Assistant (owner of the repository) : Samy Aittahar ([mail](mailto:saittahar@uliege.be), [personal page](http://www.montefiore.ulg.ac.be/~saittahar/))
 
 
 ## Specific to INFO8003-1 students
