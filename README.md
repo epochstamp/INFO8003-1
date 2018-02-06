@@ -25,9 +25,9 @@ Feel free to challenge yourself over the assignments and the project. We'll be g
 ### Session and projects
 
 - [Project](https://github.com/epochstamp/INFO8003-1/tree/master/project) : See the pdf. Deadline to be determined.
-- [Session 1](https://github.com/epochstamp/INFO8003-1/tree/master/discrete_domain) : Assignment on a discrete domain.
-- [Session 2](https://github.com/epochstamp/INFO8003-1/tree/master/continuous_domain) : Assignment on a continuous domain (not uploaded yet).
-- [Session 3](https://github.com/epochstamp/INFO8003-1/tree/master/continuous_deeplearning_domain) : Assignment on a continuous domain with deep learning and images (not uploaded yet).
+- [Session 1](https://github.com/epochstamp/INFO8003-1/tree/master/discrete_domain) : Assignment on a discrete domain. See the pdf. Deadlines to be determined.
+- [Session 2](https://github.com/epochstamp/INFO8003-1/tree/master/continuous_domain) : Assignment on a continuous domain (not uploaded yet). See the pdf. Deadlines to be determined.
+- [Session 3](https://github.com/epochstamp/INFO8003-1/tree/master/continuous_deeplearning_domain) : Assignment on a continuous domain with deep learning and images (not uploaded yet). See the pdf. Deadlines to be determined.
 
 ### Submission
 
