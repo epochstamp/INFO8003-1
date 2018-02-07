@@ -24,7 +24,7 @@ Feel free to challenge yourself over the assignments and the project. We'll be g
 ### Sessions and Project
 
 
-- [Session 1](https://github.com/epochstamp/INFO8003-1/tree/master/discrete_domain) : Assignment on a discrete domain. See the pdf. Deadlines to be determined.
+- [Session 1](https://github.com/epochstamp/INFO8003-1/tree/master/discrete_domain) : Preliminary results due to for the 14/02/2017.  Deadline for the final submission: 20/02/2017.
 - [Session 2](https://github.com/epochstamp/INFO8003-1/tree/master/continuous_domain) : Assignment on a continuous domain (not uploaded yet). See the pdf. Deadlines to be determined.
 - [Session 3](https://github.com/epochstamp/INFO8003-1/tree/master/continuous_deeplearning_domain) : Assignment on a continuous domain with deep learning and images (not uploaded yet). See the pdf. Deadlines to be determined.
 - [Project](https://github.com/epochstamp/INFO8003-1/tree/master/project) : See the pdf. Deadline to be determined.
