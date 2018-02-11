@@ -114,11 +114,11 @@ def save_caronthehill_image(position,speed,out_file):
     surf.blit(rot_car, rect) 
 
     #Display pine trees
-    pct_speed = (max_speed+speed)/(max_speed*2)
+    pct_speed = (speed)/(max_speed)
     color_speed = (pct_speed * 255,(1-pct_speed)*255,0)
     height_speed = max_height_speed*(pct_speed)
 
-
+    #Display car speed
     rect = (canvas_width - width_speed - loc_width_from_bottom,canvas_height - loc_height_from_bottom - height_speed,width_speed,height_speed) 
     surf.fill(color_speed, rect)
 
@@ -127,5 +127,5 @@ def save_caronthehill_image(position,speed,out_file):
 
 #Execution example
 if __name__=="__main__":
-    save_caronthehill_image(0,0,"out.jpeg")    
+    save_caronthehill_image(0,1,"out.jpeg")    
 
