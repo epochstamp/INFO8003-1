@@ -40,12 +40,13 @@ def save_caronthehill_image(position,speed,out_file):
     canvas_width = 400
     canvas_height = 400
     screen = pygame.display.set_mode((canvas_width, canvas_height))
-    loc_width_from_bottom = 20
-    loc_height_from_bottom = 20
+    loc_width_from_bottom = 35
+    loc_height_from_bottom = 70
     pt_pos1 = -0.5
     pt_pos2 = 0.5  
-    max_height_speed = 100
+    max_height_speed = 50
     width_speed = 30
+    thickness_speed_line=3
    
     #Image loading
     car = pygame.image.load("car.png")
@@ -69,6 +70,7 @@ def save_caronthehill_image(position,speed,out_file):
     color_hill = pygame.Color(0, 0, 0, 0)
     color_shill = pygame.Color(64, 163, 191, 0)
     color_phill = pygame.Color(64, 191, 114, 0)
+    color_acc_line = pygame.Color(0, 0, 0, 0)
 
     #Surface loading
     surf = pygame.Surface((CANVAS_WIDTH,CANVAS_HEIGHT))   
@@ -113,19 +115,26 @@ def save_caronthehill_image(position,speed,out_file):
     rot_car, rect = rotate(car, pygame.Rect(x_car,y_car, width_car, height_car), 360-angle)
     surf.blit(rot_car, rect) 
 
-    #Display pine trees
-    pct_speed = (speed)/(max_speed)
+    #Display car speed
+    
+    #Display black line
+    rect = (canvas_width-loc_width_from_bottom - width_speed, canvas_height - loc_height_from_bottom, width_speed, thickness_speed_line)
+    surf.fill(color_acc_line, rect)
+    
+    pct_speed = abs(speed)/max_speed
     color_speed = (pct_speed * 255,(1-pct_speed)*255,0)
     height_speed = max_height_speed*(pct_speed)
 
-    #Display car speed
-    rect = (canvas_width - width_speed - loc_width_from_bottom,canvas_height - loc_height_from_bottom - height_speed,width_speed,height_speed) 
+    
+    
+    loc_width = canvas_width - width_speed - loc_width_from_bottom
+    loc_height = canvas_height - loc_height_from_bottom + thickness_speed_line  if speed < 0 else canvas_height - loc_height_from_bottom - height_speed
+    rect = (loc_width,loc_height,width_speed,height_speed) 
     surf.fill(color_speed, rect)
-
+    
     pygame.image.save(surf, out_file)
     pygame.display.quit()
 
 #Execution example
 if __name__=="__main__":
     save_caronthehill_image(0,1,"out.jpeg")    
-
