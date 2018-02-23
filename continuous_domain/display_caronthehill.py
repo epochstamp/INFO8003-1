@@ -123,7 +123,7 @@ def save_caronthehill_image(position,speed,out_file):
     surf.fill(color_speed, rect)
 
     pygame.image.save(surf, out_file)
-
+    pygame.display.quit()
 
 #Execution example
 if __name__=="__main__":
