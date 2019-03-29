@@ -111,11 +111,8 @@ class MyFruit():
         whenever it has been caught/miss by the bar
         """
         self.x_range = range(
-            size *
-            2,
-            self.grid_width -
-            size *
-            2,
+            size * 2,
+            self.grid_width - size * 2,
             size)
         self.y_range = range(
             size,
@@ -228,11 +225,10 @@ class ContinuousCatcher():
         w2, h2 = self.fruit.size
 
         return (
-            y1 < y2 +
-            h2 and y1 +
-            h1 > y2 and x1 < x2 +
-            w2 and x1 +
-            w1 > x2)
+            y1 < y2 + h2 and
+            y2 < y1 + h1 and
+            x1 < x2 + w2 and
+            x2 < x1 + w1)
 
     def step(self, act):
         """
