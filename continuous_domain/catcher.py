@@ -104,6 +104,9 @@ class MyFruit():
 
         self.grid_width = grid_width
         self.grid_height = grid_height
+        
+        # Force to get a self.center (valid)
+        self.reset()
 
         """
         Defines ranges where the fruit can pop
