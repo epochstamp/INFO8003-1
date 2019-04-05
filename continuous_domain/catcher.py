@@ -178,6 +178,7 @@ class ContinuousCatcher():
         self.fps = self.dt
         self.dx = 0.0
         self.init_lives = init_lives
+        self.lives = init_lives
 
         # Parameters of the fruit
         self.fruit_size = percent_round_int(height, 0.06)
