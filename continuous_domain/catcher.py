@@ -224,11 +224,14 @@ class ContinuousCatcher():
         w1, h1 = self.bar.size
         w2, h2 = self.fruit.size
 
+        l1x, l1y = x1 - w1 / 2.0, y1 - h1 / 2.0
+        l2x, l2y = x2 - w2 / 2.0, y2 - h2 / 2.0
+
         return (
-            y1 < y2 + h2 and
-            y2 < y1 + h1 and
-            x1 < x2 + w2 and
-            x2 < x1 + w1)
+                l1y < l2y + h2 and
+                l2y < l1y + h1 and
+                l1x < l2x + w2 and
+                l2x < l1x + w1)
 
     def step(self, act):
         """
