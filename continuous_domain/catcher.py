@@ -225,7 +225,7 @@ class ContinuousCatcher():
         """
             Determines whether the bar hits the fruit
             
-            :return True if the fruit collide with the bar,
+            :return True if the bar hits the fruit,
                     False otherwise
         """
         x1, y1 = self.bar.center
