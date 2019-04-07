@@ -209,6 +209,8 @@ class ContinuousCatcher():
     def reset(self):
         """
             Resets the game back to its initial state
+            
+            :return The observed state of the game
         """
         self.lives = self.init_lives
         self.fruit_reset()
@@ -218,6 +220,9 @@ class ContinuousCatcher():
     def _collide_fruit(self):
         """
             Determines whether the bar hits the fruit
+            
+            :return True if the fruit collide with the bar,
+                    False otherwise
         """
         x1, y1 = self.bar.center
         x2, y2 = self.fruit.center
@@ -233,6 +238,11 @@ class ContinuousCatcher():
     def step(self, act):
         """
             Update the game with respect to its dynamics
+            
+            :param act array-like with only one dimension
+                    act < 0 push left
+                    act > 0 push right
+                    act == 0 do nothing
         """
         done = False
 
@@ -268,6 +278,9 @@ class ContinuousCatcher():
     def observe(self):
         """
             Returns the current game state
+
+            :return numpy array of the form:
+                        [bar_center_x, bar_velocity, fruit_center_x, fruit_center_y]
         """
         return np.asarray([self.bar.center[0], self.bar.vel,
                            self.fruit.center[0], self.fruit.center[1]])
