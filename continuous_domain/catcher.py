@@ -144,7 +144,7 @@ class MyFruit():
             according to ranges defined by inner variables.
         """
         a, b = np.random.random((2,))
-        x = np.floor(a * (self.grid_width - self.size[0]))
+        x = np.floor((a * (self.grid_width - self.size[0])) + self.size[0] / 2.0) 
         y = np.floor(b * ((self.grid_height - self.size[1]) / 2.0))
 
         self.center = (x, -1 * y)
