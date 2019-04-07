@@ -195,8 +195,8 @@ class ContinuousCatcher():
         self.rloss = 0.0
 
         # Builds the bar with its parameters
-        self.bar = MyBar(self.bar_speed, self.bar_width,
-                         self.bar_height, self.width, self.height)
+        self.bar = MyBar(self.bar_width, self.bar_height,
+                         self.width, self.height)
         self.bar_update = self.bar.update
         self.bar_reset = self.bar.reset
 
