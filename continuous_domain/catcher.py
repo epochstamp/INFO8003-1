@@ -69,13 +69,13 @@ class MyBar():
             No bounce, null speed if grid limits
             are reached.
         """
-        if n_x <= 0:
+        if n_x - self.width / 2.0 <= 0:
             self.vel = 0.0
-            n_x = 0
+            n_x = self.width / 2.0
 
-        if n_x + self.width >= self.grid_width:
+        if n_x + self.width / 2.0 >= self.grid_width:
             self.vel = 0.0
-            n_x = self.grid_width - self.width
+            n_x = self.grid_width - self.width / 2.0
 
         self.center = (n_x, y)
 
