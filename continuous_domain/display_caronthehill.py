@@ -4,6 +4,7 @@ import pygame
 import numpy as np
 import time
 from math import atan2, degrees, pi , sqrt
+import os
 
 
 MAX_HEIGHT_SPEED = 100
@@ -14,6 +15,11 @@ LOC_WIDTH_FROM_BOTTOM = 20
 LOC_HEIGHT_FROM_BOTTOM = 20
 CANVAS_WIDTH=400
 CANVAS_HEIGHT=400
+screen = None
+car = None
+pt = None
+background = None
+checked = False
 
 def ppoints_to_angle(x1,x2):
      dx = x1[1] - x1[0]
@@ -34,12 +40,14 @@ def rotate(image, rect, angle):
 def Hill(p):
      return p*p+p if p < 0 else p/(sqrt(1+5*p*p))
 
-def save_caronthehill_image(position,speed,out_file):
-    
+def save_caronthehill_image(position,speed,out_file,close=False):
+    global screen, car, pt, background, checked
     #Initialization of variables for visualization
     canvas_width = 400
     canvas_height = 400
-    screen = pygame.display.set_mode((canvas_width, canvas_height))
+    if screen is None:
+        screen = pygame.display.set_mode((canvas_width, canvas_height))
+        pygame.display.iconify()
     loc_width_from_bottom = 35
     loc_height_from_bottom = 70
     pt_pos1 = -0.5
@@ -49,8 +57,10 @@ def save_caronthehill_image(position,speed,out_file):
     thickness_speed_line=3
    
     #Image loading
-    car = pygame.image.load("car.png")
-    pt = pygame.image.load("pine_tree.png")
+    if car is None:
+        car = pygame.image.load("car.png")
+    if pt is None:
+        pt = pygame.image.load("pine_tree.png")
     car.convert_alpha()
     pt.convert_alpha()
     size_pt = pt.get_rect().size
@@ -76,32 +86,43 @@ def save_caronthehill_image(position,speed,out_file):
     surf = pygame.Surface((CANVAS_WIDTH,CANVAS_HEIGHT))   
     surf.convert() 
 
-    #hill function plot
-    points = list(np.arange(-1,1,step_hill)) 
-    hl = list(map(Hill,points))
+    
 
     #Discretization of the hill function steps 
     
     
     #Draw the background and the hill function altogether
-    range_h = range(canvas_height)
-    pix=0
-    for h in hl:
-        x = pix
-        y = ((canvas_height)/2) * (1+h)
-         
+    if not checked and not os.path.isfile("background_"+str(canvas_width)+"_"+str(canvas_height)+".png"):
 
-        y = int(round(y))
-        for yo in range_h:
-            if yo < y:
-                c = color_phill
-            elif yo > y:
-                c = color_shill
-            surf.set_at((x, canvas_height - yo), c)
+        #hill function plot
+        points = list(np.arange(-1,1,step_hill)) 
+        hl = list(map(Hill,points))
+        range_h = range(canvas_height)
+        pix=0
+        for h in hl:
+            x = pix
+            y = ((canvas_height)/2) * (1+h)
+             
 
-        surf.set_at((x, canvas_height - y), color_hill)
-        pix += 1
-    
+            y = int(round(y))
+            for yo in range_h:
+                if yo < y:
+                    c = color_phill
+                elif yo > y:
+                    c = color_shill
+                surf.set_at((x, canvas_height - yo), c)
+
+            surf.set_at((x, canvas_height - y), color_hill)
+            pix += 1
+        pygame.image.save(surf, "background_"+str(canvas_width)+"_"+str(canvas_height)+".png")
+        checked = True
+        
+    else: 
+        if background is None:
+            background = pygame.image.load("background_"+str(canvas_width)+"_"+str(canvas_height)+".png")
+        surf.blit(background, (0,0))
+        
+
     #Display pine trees
     surf.blit(pt,(round((canvas_width/2)*(1+pt_pos1)) - width_pt/2, canvas_height - round(((canvas_height)/2) * (1+Hill(pt_pos1))) - height_pt))
     surf.blit(pt,(round((canvas_width/2)*(1+pt_pos2)) - width_pt/2, canvas_height - round(((canvas_height)/2) * (1+Hill(pt_pos2))) - height_pt))
@@ -133,8 +154,13 @@ def save_caronthehill_image(position,speed,out_file):
     surf.fill(color_speed, rect)
     
     pygame.image.save(surf, out_file)
-    pygame.display.quit()
+    if close:
+        pygame.display.quit()
 
 #Execution example
 if __name__=="__main__":
-    save_caronthehill_image(0,1,"out.jpeg")    
+    t = time.time()
+    for i in range(1000):
+        save_caronthehill_image(0,1,"out.jpeg")
+    save_caronthehill_image(0,1,"out.jpeg",close=True)     
+    print("It took " + str(time.time() - t) + " seconds to generate 10000 images")
