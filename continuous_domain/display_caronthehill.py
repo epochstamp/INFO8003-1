@@ -160,7 +160,8 @@ def save_caronthehill_image(position,speed,out_file,close=False):
 #Execution example
 if __name__=="__main__":
     t = time.time()
-    for i in range(1000):
+    for i in range(10000):
         save_caronthehill_image(0,1,"out.jpeg")
-    save_caronthehill_image(0,1,"out.jpeg",close=True)     
+    save_caronthehill_image(0,1,"out.jpeg",close=True)
+    #Less than an minute
     print("It took " + str(time.time() - t) + " seconds to generate 10000 images")
