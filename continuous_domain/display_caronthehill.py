@@ -20,6 +20,22 @@ car = None
 pt = None
 background = None
 checked = False
+size_car = None
+width_car = None
+height_car = None
+size_pt = None
+width_pt = None
+height_pt = None
+#Coloring
+color_hill = pygame.Color(0, 0, 0, 0)
+color_shill = pygame.Color(64, 163, 191, 0)
+color_phill = pygame.Color(64, 191, 114, 0)
+color_acc_line = pygame.Color(0, 0, 0, 0)
+
+#Initialization of variables related to car on the hill
+max_speed=3
+min_speed=-3
+step_hill = 2.0/CANVAS_WIDTH
 
 def ppoints_to_angle(x1,x2):
      dx = x1[1] - x1[0]
@@ -40,13 +56,10 @@ def rotate(image, rect, angle):
 def Hill(p):
      return p*p+p if p < 0 else p/(sqrt(1+5*p*p))
 
-def save_caronthehill_image(position,speed,out_file,close=False):
-    global screen, car, pt, background, checked
-    #Initialization of variables for visualization
-    canvas_width = 400
-    canvas_height = 400
+def save_caronthehill_image(position,speed,out_file=None,close=False):
+    global screen, car, pt, background, checked, size_pt, width_pt, height_pt, size_car, width_car, height_car
     if screen is None:
-        screen = pygame.display.set_mode((canvas_width, canvas_height))
+        screen = pygame.display.set_mode((CANVAS_WIDTH, CANVAS_HEIGHT))
         pygame.display.iconify()
     loc_width_from_bottom = 35
     loc_height_from_bottom = 70
@@ -59,28 +72,21 @@ def save_caronthehill_image(position,speed,out_file,close=False):
     #Image loading
     if car is None:
         car = pygame.image.load("car.png")
+        car.convert_alpha()
+        size_car = car.get_rect().size
+        width_car = size_car[0]
+        height_car = size_car[1]
     if pt is None:
         pt = pygame.image.load("pine_tree.png")
-    car.convert_alpha()
-    pt.convert_alpha()
-    size_pt = pt.get_rect().size
-    size_car = car.get_rect().size
-    width_car = size_car[0]
-    height_car = size_car[1]
-    width_pt = size_pt[0]
-    height_pt = size_pt[1]
+        pt.convert_alpha()
+        size_pt = pt.get_rect().size
+        width_pt = size_pt[0]
+        height_pt = size_pt[1]
 
-    #Initialization of variables related to car on the hill
-    max_speed=3
-    min_speed=-3
-    step_hill = 2.0/canvas_width
+
     
 
-    #Coloring
-    color_hill = pygame.Color(0, 0, 0, 0)
-    color_shill = pygame.Color(64, 163, 191, 0)
-    color_phill = pygame.Color(64, 191, 114, 0)
-    color_acc_line = pygame.Color(0, 0, 0, 0)
+
 
     #Surface loading
     surf = pygame.Surface((CANVAS_WIDTH,CANVAS_HEIGHT))   
@@ -92,16 +98,16 @@ def save_caronthehill_image(position,speed,out_file,close=False):
     
     
     #Draw the background and the hill function altogether
-    if not checked and not os.path.isfile("background_"+str(canvas_width)+"_"+str(canvas_height)+".png"):
+    if not checked and not os.path.isfile("background_"+str(CANVAS_WIDTH)+"_"+str(CANVAS_HEIGHT)+".png"):
 
         #hill function plot
         points = list(np.arange(-1,1,step_hill)) 
         hl = list(map(Hill,points))
-        range_h = range(canvas_height)
+        range_h = range(CANVAS_HEIGHT)
         pix=0
         for h in hl:
             x = pix
-            y = ((canvas_height)/2) * (1+h)
+            y = ((CANVAS_HEIGHT)/2) * (1+h)
              
 
             y = int(round(y))
@@ -110,28 +116,28 @@ def save_caronthehill_image(position,speed,out_file,close=False):
                     c = color_phill
                 elif yo > y:
                     c = color_shill
-                surf.set_at((x, canvas_height - yo), c)
+                surf.set_at((x, CANVAS_HEIGHT - yo), c)
 
-            surf.set_at((x, canvas_height - y), color_hill)
+            surf.set_at((x, CANVAS_HEIGHT - y), color_hill)
             pix += 1
-        pygame.image.save(surf, "background_"+str(canvas_width)+"_"+str(canvas_height)+".png")
+        pygame.image.save(surf, "background_"+str(CANVAS_WIDTH)+"_"+str(CANVAS_HEIGHT)+".png")
         checked = True
         
     else: 
         if background is None:
-            background = pygame.image.load("background_"+str(canvas_width)+"_"+str(canvas_height)+".png")
+            background = pygame.image.load("background_"+str(CANVAS_WIDTH)+"_"+str(CANVAS_HEIGHT)+".png")
         surf.blit(background, (0,0))
         
 
     #Display pine trees
-    surf.blit(pt,(round((canvas_width/2)*(1+pt_pos1)) - width_pt/2, canvas_height - round(((canvas_height)/2) * (1+Hill(pt_pos1))) - height_pt))
-    surf.blit(pt,(round((canvas_width/2)*(1+pt_pos2)) - width_pt/2, canvas_height - round(((canvas_height)/2) * (1+Hill(pt_pos2))) - height_pt))
+    surf.blit(pt,(round((CANVAS_WIDTH/2)*(1+pt_pos1)) - width_pt/2, CANVAS_HEIGHT - round(((CANVAS_HEIGHT)/2) * (1+Hill(pt_pos1))) - height_pt))
+    surf.blit(pt,(round((CANVAS_WIDTH/2)*(1+pt_pos2)) - width_pt/2, CANVAS_HEIGHT - round(((CANVAS_HEIGHT)/2) * (1+Hill(pt_pos2))) - height_pt))
 
     #Display the car
-    x_car = round((canvas_width/2)*(1+position)) - width_car/2
+    x_car = round((CANVAS_WIDTH/2)*(1+position)) - width_car/2
     h_car = Hill(position)
     h_car_next = Hill(position + step_hill)
-    y_car = canvas_height - round(((canvas_height)/2) * (1+h_car)) - height_car
+    y_car = CANVAS_HEIGHT - round(((CANVAS_HEIGHT)/2) * (1+h_car)) - height_car
     angle= ppoints_to_angle((position,position+step_hill),(h_car,h_car_next)) 
     rot_car, rect = rotate(car, pygame.Rect(x_car,y_car, width_car, height_car), 360-angle)
     surf.blit(rot_car, rect) 
@@ -139,7 +145,7 @@ def save_caronthehill_image(position,speed,out_file,close=False):
     #Display car speed
     
     #Display black line
-    rect = (canvas_width-loc_width_from_bottom - width_speed, canvas_height - loc_height_from_bottom, width_speed, thickness_speed_line)
+    rect = (CANVAS_WIDTH-loc_width_from_bottom - width_speed, CANVAS_HEIGHT - loc_height_from_bottom, width_speed, thickness_speed_line)
     surf.fill(color_acc_line, rect)
     
     pct_speed = abs(speed)/max_speed
@@ -148,20 +154,23 @@ def save_caronthehill_image(position,speed,out_file,close=False):
 
     
     
-    loc_width = canvas_width - width_speed - loc_width_from_bottom
-    loc_height = canvas_height - loc_height_from_bottom + thickness_speed_line  if speed < 0 else canvas_height - loc_height_from_bottom - height_speed
+    loc_width = CANVAS_WIDTH - width_speed - loc_width_from_bottom
+    loc_height = CANVAS_HEIGHT - loc_height_from_bottom + thickness_speed_line  if speed < 0 else CANVAS_HEIGHT - loc_height_from_bottom - height_speed
     rect = (loc_width,loc_height,width_speed,height_speed) 
     surf.fill(color_speed, rect)
     
-    pygame.image.save(surf, out_file)
+    if out_file is not None:
+        pygame.image.save(surf, out_file)
+        return True
+    else:
+        return pygame.surfarray.pixels3d(surf)
     if close:
         pygame.display.quit()
 
 #Execution example
 if __name__=="__main__":
     t = time.time()
-    for i in range(10000):
-        save_caronthehill_image(0,1,"out.jpeg")
-    save_caronthehill_image(0,1,"out.jpeg",close=True)
-    #Less than an minute
+    for i in range(1000):
+        save_caronthehill_image(0,1,out_file=None)
+    a = save_caronthehill_image(0,1,out_file=None,close=True)   
     print("It took " + str(time.time() - t) + " seconds to generate 10000 images")
